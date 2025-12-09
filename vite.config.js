@@ -17,7 +17,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'http://backend:3000',
+        target: 'https://backend-smartcard-production.up.railway.app',
         changeOrigin: true,
       },
     },

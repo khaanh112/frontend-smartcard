@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL, API_BASE_URL } from '../config/api';
 import {
   FaPlus,
   FaEye,
@@ -36,7 +37,7 @@ const Dashboard = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:3000/api/v1/profiles/my-profiles', {
+      const response = await axios.get(`${API_BASE_URL}/profiles/my-profiles`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -69,7 +70,7 @@ const Dashboard = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:3000/api/v1/profiles/${profileId}`, {
+      await axios.delete(`${API_BASE_URL}/profiles/${profileId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -84,7 +85,7 @@ const Dashboard = () => {
   };
 
   const handleViewProfile = (slug) => {
-    window.open(`http://localhost:5173/${slug}`, '_blank');
+    window.open(`${window.location.origin}/${slug}`, '_blank');
   };
 
   // Filter profiles based on search and status
@@ -336,7 +337,7 @@ const Dashboard = () => {
                       <span className="text-xs">Analytics</span>
                     </button>
                     <button
-                      onClick={() => window.open(`http://localhost:3000${profile.qrCodeUrl || '/uploads/qrcodes/' + profile.id + '.png'}`, '_blank')}
+                      onClick={() => window.open(`${API_URL}${profile.qrCodeUrl || '/uploads/qrcodes/' + profile.id + '.png'}`, '_blank')}
                       className="flex flex-col items-center gap-1 p-2 text-purple-600 hover:bg-purple-50 rounded transition"
                       title="Download QR"
                       disabled={!profile.qrCodeUrl}

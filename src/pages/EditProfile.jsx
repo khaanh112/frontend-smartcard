@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaSave, FaTimes, FaSpinner, FaUser, FaImage, FaBriefcase, FaLink, FaCamera, FaTrash } from 'react-icons/fa';
+import { API_URL, API_BASE_URL } from '../config/api';
 
 const EditProfile = () => {
   const { profileId } = useParams();
@@ -53,7 +54,7 @@ const EditProfile = () => {
       console.log('Fetching profile with token:', token.substring(0, 20) + '...');
       
       const response = await axios.get(
-        `http://localhost:3000/api/v1/profiles/edit/${profileId}`,
+        `${API_BASE_URL}/profiles/edit/${profileId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -128,7 +129,7 @@ const EditProfile = () => {
       };
 
       await axios.put(
-        `http://localhost:3000/api/v1/profiles/${profileId}`,
+        `${API_BASE_URL}/profiles/${profileId}`,
         profileData,
         {
           headers: {
@@ -236,7 +237,7 @@ const EditProfile = () => {
       console.log('Uploading avatar:', file.name, 'size:', file.size);
 
       const response = await axios.post(
-        'http://localhost:3000/api/v1/profiles/upload-avatar',
+        `${API_BASE_URL}/profiles/upload-avatar`,
         formData,
         {
           headers: {
@@ -247,7 +248,7 @@ const EditProfile = () => {
 
       console.log('Avatar uploaded successfully:', response.data);
 
-      const fullAvatarUrl = `http://localhost:3000${response.data.avatarUrl}`;
+      const fullAvatarUrl = `${API_URL}${response.data.avatarUrl}`;
       handleInputChange('avatarUrl', fullAvatarUrl);
       setUploadingAvatar(false);
       alert('Upload ảnh thành công!');

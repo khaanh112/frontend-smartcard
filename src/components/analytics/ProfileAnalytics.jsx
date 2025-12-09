@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api';
 import {
   FaEye,
   FaQrcode,
@@ -38,7 +39,7 @@ const ProfileAnalytics = ({ profileId }) => {
       setLoading(true);
       const token = localStorage.getItem('token');
       const response = await axios.get(
-        `http://localhost:3000/api/v1/analytics/profiles/${profileId}/analytics`,
+        `${API_BASE_URL}/analytics/profiles/${profileId}/analytics`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

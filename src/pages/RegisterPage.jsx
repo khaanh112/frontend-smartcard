@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { FaUser, FaEnvelope, FaLock, FaSpinner, FaCheckCircle } from 'react-icons/fa';
+import { API_URL, API_BASE_URL } from '../config/api';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const RegisterPage = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/api/v1/auth/register',
+        `${API_BASE_URL}/auth/register`,
         {
           fullName: formData.fullName,
           email: formData.email,
@@ -87,7 +88,7 @@ const RegisterPage = () => {
 
   const handleGoogleSignup = () => {
     // Redirect to Google OAuth endpoint
-    window.location.href = 'http://localhost:3000/api/v1/auth/google';
+    window.location.href = `${API_BASE_URL}/auth/google`;
   };
 
   const getPasswordStrengthColor = () => {

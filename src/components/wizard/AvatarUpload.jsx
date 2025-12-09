@@ -4,6 +4,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 import { FaCamera, FaTrash, FaTimes } from 'react-icons/fa';
 import axios from 'axios';
 import useWizardStore from '../../store/wizardStore';
+import { API_URL, API_BASE_URL } from '../../config/api';
 
 const AvatarUpload = ({ onNext, onBack }) => {
   const { avatarUrl, setAvatarUrl } = useWizardStore();
@@ -142,7 +143,7 @@ const AvatarUpload = ({ onNext, onBack }) => {
       }
 
       const response = await axios.post(
-        'http://localhost:3000/api/v1/profiles/upload-avatar',
+        `${API_BASE_URL}/profiles/upload-avatar`,
         formData,
         {
           headers: {
@@ -157,7 +158,7 @@ const AvatarUpload = ({ onNext, onBack }) => {
       );
 
       if (response.data.avatarUrl) {
-        const fullAvatarUrl = `http://localhost:3000${response.data.avatarUrl}`;
+        const fullAvatarUrl = `${API_URL}${response.data.avatarUrl}`;
         setAvatarUrl(fullAvatarUrl);
         setShowCropModal(false);
         setSelectedImage(null);

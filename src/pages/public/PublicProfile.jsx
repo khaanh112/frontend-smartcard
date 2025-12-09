@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { FaSpinner } from 'react-icons/fa';
 import DefaultTheme from '../../themes/DefaultTheme';
+import { API_BASE_URL } from '../../config/api';
 
 const PublicProfile = () => {
   const { slug } = useParams();
@@ -24,7 +25,7 @@ const PublicProfile = () => {
   const fetchProfile = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/v1/profiles/${slug}`
+        `${API_BASE_URL}/profiles/${slug}`
       );
       setProfile(response.data.profile);
     } catch (err) {
@@ -39,7 +40,7 @@ const PublicProfile = () => {
     try {
       const referrer = document.referrer || 'direct';
       
-      await axios.post('http://localhost:3000/api/v1/analytics/track-view', {
+      await axios.post(`${API_BASE_URL}/analytics/track-view`, {
         profileId: profile.id,
         source: 'DIRECT',
         referrer,

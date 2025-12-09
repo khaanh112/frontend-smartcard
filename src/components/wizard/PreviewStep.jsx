@@ -4,6 +4,7 @@ import axios from 'axios';
 import useWizardStore from '../../store/wizardStore';
 import DefaultTheme from '../../themes/DefaultTheme';
 import { FaEdit, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
+import { API_BASE_URL } from '../../config/api';
 
 const PreviewStep = ({ onBack }) => {
   const navigate = useNavigate();
@@ -90,7 +91,7 @@ const PreviewStep = ({ onBack }) => {
       };
 
       const response = await axios.post(
-        'http://localhost:3000/api/v1/profiles',
+        `${API_BASE_URL}/profiles`,
         profileData,
         {
           headers: {

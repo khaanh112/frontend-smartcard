@@ -1,5 +1,6 @@
 ﻿import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { API_URL } from '../config/api';
 import { 
   FaCheckCircle, 
   FaCopy, 
@@ -143,7 +144,7 @@ const ProfileSuccess = () => {
                   </h3>
                 </div>
                 <a
-                  href={`http://localhost:3000${profile.qrCodeUrl}`}
+                  href={`${API_URL}${profile.qrCodeUrl}`}
                   download={`${profile.slug}-qrcode.png`}
                   className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
                 >
@@ -154,7 +155,7 @@ const ProfileSuccess = () => {
               <div className="flex items-center gap-4">
                 <div className="flex-shrink-0 bg-white p-2 rounded-lg shadow-sm">
                   <img
-                    src={`http://localhost:3000${profile.qrCodeUrl}`}
+                    src={`${API_URL}${profile.qrCodeUrl}`}
                     alt="Profile QR Code"
                     className="w-32 h-32 object-contain"
                   />
